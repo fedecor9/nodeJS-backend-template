@@ -6,6 +6,7 @@ const compress = require("compression");
 
 //import routes
 import userRoutes from "./routes/user.routes";
+import authRoutes from "./routes/user.routes";
 
 //express app
 const app = express();
@@ -19,5 +20,16 @@ app.use(compress());
 
 //routes
 app.use("/", userRoutes);
+app.use("/", authRoutes);
+
+//Error handling
+app.use((err, req, res, next) => {
+  if (err.name === "UnauthorizedError")
+    res.status(401).json({ error: `${err.name}: ${err.message}` });
+  else if (err) {
+    res.status(401).json({ error: `${err.name}: ${err.message}` });
+    console.log(err);
+  }
+});
 
 export default app;

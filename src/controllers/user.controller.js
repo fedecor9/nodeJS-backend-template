@@ -1,6 +1,6 @@
 import User from "../models/user.model";
 import { extend } from "lodash";
-import errorHandler from "./error.controller";
+import errorHandler from "../helpers/dbErrorHandler";
 
 /**
  * Creates a new user with the user JSON object that's received in the POST
